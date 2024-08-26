@@ -2,7 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 const axiosWithToken = axios.create({
-    baseURL: 'http://localhost:8000/api/',
+    baseURL: 'http://backend-ibtissam.infinityfreeapp.com/api/',
     headers: {
         'Content-Type': 'application/json',
     },
