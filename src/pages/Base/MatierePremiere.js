@@ -29,120 +29,120 @@ import ExportCSVModal from "../../Components/Common/ExportCSVModal";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import axiosWithToken from "../ApiCalls/axiosWithToken";
-import * as LeadApi from "../ApiCalls/LeadsAPI";
+import * as MatierePremiereAPI from "../ApiCalls/MatierePremiereAPI";
 import * as CollaboratorsAPI from "../ApiCalls/CollaboratorsAPI";
-import {updateLeadRequest} from "../ApiCalls/LeadsAPI";
-export default function Leads() {
-  document.title = "Leads";
+import {updateMatierePremiereRequest} from "../ApiCalls/MatierePremiereAPI";
+export default function MatierePremieres() {
+  document.title = "MatierePremieres";
 
 /*  // DATA
-  const mockLeads = [
+  const mockMatierePremieres = [
     {
       id: 1,
-      leadId: "#VZ001",
+      matierePremiereId: "#VZ001",
       username: "hajar_ammari",
       name: "Hajar AMMARI",
-      email: "hajar.ammari@gmail.com",
-      phone: "+212 660 51 58 30",
+      quantity: "hajar.ammari@gmail.com",
+      unit: "+212 660 51 58 30",
       creation_date: "09 Jul, 2024",
       last_activity: ["11 Jul, 2024", "08:58AM"],
       statuses: [{ label: "ACTIVE", value: "ACTIVE" }],
     },
     {
       id: 2,
-      leadId: "#VZ002",
+      matierePremiereId: "#VZ002",
       username: "john_doe",
       name: "John DOE",
-      email: "john.doe@example.com",
-      phone: "+1 123 456 7890",
+      quantity: "john.doe@example.com",
+      unit: "+1 123 456 7890",
       creation_date: "10 Jul, 2024",
       last_activity: ["12 Jul, 2024", "10:30AM"],
       statuses: [{ label: "ACTIVE", value: "ACTIVE" }],
     },
     {
       id: 3,
-      leadId: "#VZ003",
+      matierePremiereId: "#VZ003",
       username: "alice_wonderland",
       name: "Alice WONDERLAND",
-      email: "alice.wonderland@example.com",
-      phone: "+44 20 1234 5678",
+      quantity: "alice.wonderland@example.com",
+      unit: "+44 20 1234 5678",
       creation_date: "11 Jul, 2024",
       last_activity: ["13 Jul, 2024", "11:45AM"],
       statuses: [{ label: "ACTIVE", value: "ACTIVE" }],
     },
     {
       id: 4,
-      leadId: "#VZ004",
+      matierePremiereId: "#VZ004",
       username: "michael_jones",
       name: "Michael JONES",
-      email: "michael.jones@example.com",
-      phone: "+1 987 654 3210",
+      quantity: "michael.jones@example.com",
+      unit: "+1 987 654 3210",
       creation_date: "12 Jul, 2024",
       last_activity: ["14 Jul, 2024", "01:20PM"],
       statuses: [{ label: "ACTIVE", value: "ACTIVE" }],
     },
     {
       id: 5,
-      leadId: "#VZ005",
+      matierePremiereId: "#VZ005",
       username: "sara_smith",
       name: "Sara SMITH",
-      email: "sara.smith@example.com",
-      phone: "+61 2 1234 5678",
+      quantity: "sara.smith@example.com",
+      unit: "+61 2 1234 5678",
       creation_date: "13 Jul, 2024",
       last_activity: ["15 Jul, 2024", "03:10PM"],
       statuses: [{ label: "ACTIVE", value: "ACTIVE" }],
     },
     {
       id: 6,
-      leadId: "#VZ006",
+      matierePremiereId: "#VZ006",
       username: "adam_brown",
       name: "Adam BROWN",
-      email: "adam.brown@example.com",
-      phone: "+44 20 9876 5432",
+      quantity: "adam.brown@example.com",
+      unit: "+44 20 9876 5432",
       creation_date: "14 Jul, 2024",
       last_activity: ["16 Jul, 2024", "04:55PM"],
       statuses: [{ label: "ACTIVE", value: "ACTIVE" }],
     },
     {
       id: 7,
-      leadId: "#VZ007",
+      matierePremiereId: "#VZ007",
       username: "emma_davis",
       name: "Emma DAVIS",
-      email: "emma.davis@example.com",
-      phone: "+1 234 567 8901",
+      quantity: "emma.davis@example.com",
+      unit: "+1 234 567 8901",
       creation_date: "15 Jul, 2024",
       last_activity: ["17 Jul, 2024", "09:20AM"],
       statuses: [{ label: "ACTIVE", value: "ACTIVE" }],
     },
     {
       id: 8,
-      leadId: "#VZ008",
+      matierePremiereId: "#VZ008",
       username: "peter_smith",
       name: "Peter SMITH",
-      email: "peter.smith@example.com",
-      phone: "+61 2 9876 5432",
+      quantity: "peter.smith@example.com",
+      unit: "+61 2 9876 5432",
       creation_date: "16 Jul, 2024",
       last_activity: ["18 Jul, 2024", "12:40PM"],
       statuses: [{ label: "ACTIVE", value: "ACTIVE" }],
     },
     {
       id: 9,
-      leadId: "#VZ009",
+      matierePremiereId: "#VZ009",
       username: "lisa_jones",
       name: "Lisa JONES",
-      email: "lisa.jones@example.com",
-      phone: "+1 345 678 9012",
+      quantity: "lisa.jones@example.com",
+      unit: "+1 345 678 9012",
       creation_date: "17 Jul, 2024",
       last_activity: ["19 Jul, 2024", "02:15PM"],
       statuses: [{ label: "ACTIVE", value: "ACTIVE" }],
     },
     {
       id: 10,
-      leadId: "#VZ010",
+      matierePremiereId: "#VZ010",
       username: "alex_anderson",
       name: "Alex ANDERSON",
-      email: "alex.anderson@example.com",
-      phone: "+44 20 3456 7890",
+      quantity: "alex.anderson@example.com",
+      unit: "+44 20 3456 7890",
       creation_date: "18 Jul, 2024",
       last_activity: ["20 Jul, 2024", "03:50PM"],
       statuses: [{ label: "ACTIVE", value: "ACTIVE" }],
@@ -167,12 +167,12 @@ export default function Leads() {
 
   // State management
   const [isEdit, setIsEdit] = useState(false);
-  const [leads, setLead] = useState([]);
-  const [selectedLead, setSelectedLead] = useState([]);
-  const [leadToDelete, setLeadToDelete] = useState(null);
+  const [matierePremieres, setMatierePremiere] = useState([]);
+  const [selectedMatierePremiere, setSelectedMatierePremiere] = useState([]);
+  const [matierePremiereToDelete, setMatierePremiereToDelete] = useState(null);
   const [deleteModal, setDeleteModal] = useState(false);
-  const [leadDeleted, setLeadDeleted] = useState(false);
-  const [leadAdded, setLeadAdded] = useState(false);
+  const [matierePremiereDeleted, setMatierePremiereDeleted] = useState(false);
+  const [matierePremiereAdded, setMatierePremiereAdded] = useState(false);
   const [modal, setModal] = useState(false);
   const [status, setStatus] = useState([]);
   const [assignStatus, setAssignStatus] = useState([]);
@@ -183,34 +183,34 @@ export default function Leads() {
   const [deleteModalMulti, setDeleteModalMulti] = useState(false);
   const [viewModal, setViewModal] = useState(false);
   const [isLoiding, setLoiding] = useState(true);
-///////////////////////////////////////////////////////////////////////////GET ALL LEADS //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////GET ALL CLIENTS //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*  useEffect(() => {
-    setLead(mockLeads);
-    if (!info.id && leads.length > 0) {
+    setMatierePremiere(mockMatierePremieres);
+    if (!info.id && matierePremieres.length > 0) {
       setIsEdit(false);
-      setInfo(leads[0]);
+      setInfo(matierePremieres[0]);
     }
   }, []);*/
 
 
-  const getAllLeads = async () => {
+  const getAllMatierePremieres = async () => {
     try {
-      const response = await axiosWithToken.get('/leads/get-collaborator-leads');
+      const response = await axiosWithToken.get('/matiere');
+      console.log(response)
       if (response.data != null ) {
-      const leads = response.data.map(lead => ({
-        ...lead,
-        _id: lead.leadId,
-        statuses: lead.status ? [transformStatus(lead.status)] : [],
+      const matierePremieres = response.data.map(matierePremiere => ({
+        ...matierePremiere,
+        id: matierePremiere.id,
       }));
-        console.log('Response of getting all leads:', leads);
-        return leads;
+        console.log('Response of getting all matierePremieres:', matierePremieres);
+        return matierePremieres;
       }else {
-        console.log('No leads found');
+        console.log('No matierePremieres found');
         return [];
       }
 
     } catch (error) {
-      console.error('Error getting leads:', error);
+      console.error('Error getting matierePremieres:', error);
       throw error;
     }
   } ;
@@ -219,15 +219,16 @@ export default function Leads() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const leadsData = await  getAllLeads();
-        setLead(leadsData);
+        const matierePremieresData = await  getAllMatierePremieres();
+        
+        setMatierePremiere(matierePremieresData);
 
-        if (!info.id && leadsData.length > 0) {
+        if (!info.id && matierePremieresData.length > 0) {
           setIsEdit(false);
-          setInfo(leadsData[0]);
+          setInfo(matierePremieresData[0]);
         }
       } catch (error) {
-        console.error('Failed to fetch leads:', error);
+        console.error('Failed to fetch matierePremieres:', error);
       }finally {
         setLoiding(false);
       }
@@ -241,7 +242,7 @@ export default function Leads() {
     if (modal) {
       setModal(false);
       setIsEdit(false);
-      setSelectedLead(null);
+      setSelectedMatierePremiere(null);
     } else {
       setModal(true);
       setStatus([]);
@@ -253,8 +254,8 @@ export default function Leads() {
     setViewModal(!viewModal);
   }, [viewModal]);
 
-  const handleLeadClicks = () => {
-    setSelectedLead("");
+  const handleMatierePremiereClicks = () => {
+    setSelectedMatierePremiere("");
     setIsEdit(false);
     toggle();
   };
@@ -279,10 +280,10 @@ export default function Leads() {
   ////////////////////////////////////// CREATE ////////////////////////////////////
 
   const generateNewId = () => {
-    return leads.length > 0 ? Math.max(leads.map((lead) => lead.id)) + 1 : 1;
+    return matierePremieres.length > 0 ? Math.max(matierePremieres.map((matierePremiere) => matierePremiere.id)) + 1 : 1;
   };
 
-  const generateNewLeadId = () => {
+  const generateNewMatierePremiereId = () => {
     return `#VZ${String(generateNewId()).padStart(3, "0")}`;
   };
   function handlesStatus(statuses) {
@@ -291,48 +292,50 @@ export default function Leads() {
     setAssignStatus(assigned);
   }
 
-  const addLead = async(newLead) => {
+  const addMatierePremiere = async(newMatierePremiere) => {
     try {
-      const response = await LeadApi.addLead(newLead);
-   /*   const parts =response.split('LEAD') ;
+      const response = await MatierePremiereAPI.addMatierePremiereRequest(newMatierePremiere);
+   /*   const parts =response.split('CLIENT') ;
       const loginId = parts[0] ;
-      const leadId = parts[1].trim(" ") ;
-      console.log("LOGIN ID of adding lead:", loginId);
-      console.log("LeadID of adding lead:", leadId);*/
-      console.log("LEAD PASSWORD IS : " ,  response.password)  ;
+      const matierePremiereId = parts[1].trim(" ") ;
+      console.log("LOGIN ID of adding matierePremiere:", loginId);
+      console.log("MatierePremiereID of adding matierePremiere:", matierePremiereId);*/
+      console.log("CLIENT PASSWORD IS : " ,  response.password)  ;
       const  newL = {
         ...response,
-        _id : response.leadId,
+        id : response.matierePremiereId,
         username : response.username,
-      statuses  : newLead.status ? [transformStatus(newLead.status)] : [],
+      statuses  : newMatierePremiere.status ? [transformStatus(newMatierePremiere.status)] : [],
       }
-      console.log('New Lead added:', newL) ;
-      setLead([...leads, newL]);
-      setLeadAdded(true);
+     
+
+      console.log('New MatierePremiere added:', response) ;
+      setMatierePremiere(matierePremieres);
+      setMatierePremiereAdded(true);
       setIsEdit(false);
       setModal(false);
-      toast.success("Lead added successfully") ;
+      toast.success("matierePremiere addedd!") 
     } catch (error) {
-      toast.error('Failed to add lead.');
-      console.error('Error adding lead:', error);
+      toast.error('Failed to add matierePremiere.');
+      console.error('Error adding matierePremiere:', error);
     }
   }
 
 /*
-  const addLead = (newLead) => {
-    console.log("New Lead:", newLead);
+  const addMatierePremiere = (newMatierePremiere) => {
+    console.log("New MatierePremiere:", newMatierePremiere);
 
-    // Check if the id exists in the leads array
-    const existingLeadIndex = leads.findIndex((c) => c._id === newLead._id);
+    // Check if the id exists in the matierePremieres array
+    const existingMatierePremiereIndex = matierePremieres.findIndex((c) => c.id === newMatierePremiere.id);
 
-    let updatedLeads;
-    if (existingLeadIndex !== -1) {
-      // Update existing lead
-      updatedLeads = leads.map((c, index) =>
-        index === existingLeadIndex
+    let updatedMatierePremieres;
+    if (existingMatierePremiereIndex !== -1) {
+      // Update existing matierePremiere
+      updatedMatierePremieres = matierePremieres.map((c, index) =>
+        index === existingMatierePremiereIndex
           ? {
-              ...c, // Preserve other fields from the existing lead
-              ...newLead, // Update fields with new values
+              ...c, // Preserve other fields from the existing matierePremiere
+              ...newMatierePremiere, // Update fields with new values
               last_activity: [
                 moment().format("DD MMM, YYYY"),
                 moment().format("hh:mmA"),
@@ -341,46 +344,48 @@ export default function Leads() {
           : c
       );
     } else {
-      // Add new lead
-      const newLeadWithId = {
-        ...newLead,
+      // Add new matierePremiere
+      const newMatierePremiereWithId = {
+        ...newMatierePremiere,
         id: generateNewId(), // Generate a new unique id
-        leadId: generateNewLeadId(),
+        matierePremiereId: generateNewMatierePremiereId(),
         creation_date: moment().format("DD MMM, YYYY"),
         last_activity: [
           moment().format("DD MMM, YYYY"),
           moment().format("hh:mmA"),
         ],
       };
-      updatedLeads = [newLeadWithId, ...leads];
+      updatedMatierePremieres = [newMatierePremiereWithId, ...matierePremieres];
     }
 
-    setLead(updatedLeads);
-    setLeadAdded(true);
+    setMatierePremiere(updatedMatierePremieres);
+    setMatierePremiereAdded(true);
     setIsEdit(false);
     setModal(false);
   };
 */
 
   useEffect(() => {
-    if (leadAdded) {
-      setLeadAdded(false);
+    if (matierePremiereAdded) {
+      setMatierePremiereAdded(false);
     }
-  }, [leadAdded]);
+  }, [matierePremiereAdded]);
 
   ////////////////////////////////////// UPDATE ////////////////////////////////////
 
-  const handleLeadClick = useCallback(
+  const handleMatierePremiereClick = useCallback(
     (arg) => {
-      const selectedLead = arg;
+      const selectedMatierePremiere = arg;
+console.log("sele",selectedMatierePremiere)
+      setSelectedMatierePremiere({
+        id: selectedMatierePremiere.id,
+        name: selectedMatierePremiere.name,
+        unit: selectedMatierePremiere.unit,
+        quantity: selectedMatierePremiere.quantity,
+        priceU: selectedMatierePremiere.priceU,
+        
+       
 
-      setSelectedLead({
-        _id: selectedLead._id,
-        name: selectedLead.name,
-        email: selectedLead.email,
-        username: selectedLead.username,
-        phone: selectedLead.phone,
-        statuses: selectedLead.statuses,
       });
 
       setIsEdit(true);
@@ -389,24 +394,25 @@ export default function Leads() {
     [toggle]
   );
 
-  const HandleupdateLead = async (id, updateLead) => {
-    console.log('New collab body Form ', updateLead);
+  const HandleupdateMatierePremiere = async (id, updateMatierePremiere) => {
+    console.log('New collab body Form ', updateMatierePremiere);
     console.log('New collab body ID ', id);
 
     try {
-      const response = await LeadApi.updateLeadRequest(id, updateLead);
+      const response = await MatierePremiereAPI.updateMatierePremiereRequest(id, updateMatierePremiere);
+      console.log("resp",response)
       const updatedL = {
         ...response,
-        _id: id,
+        id: id,
         statuses: response.status ? [transformStatus(response.status)] : [],
       };
-      setLead(leads.map(lead =>
-          lead._id === id ? updatedL : lead
+      setMatierePremiere(matierePremieres.map(matierePremiere =>
+          matierePremiere.id === id ? updatedL : matierePremiere
       ));
-      setLeadAdded(true);
+      setMatierePremiereAdded(true);
       setIsEdit(false);
       setModal(false);
-      toast.success('Lead updated successfully.');
+      toast.success('MatierePremiere updated successfully.');
     } catch (error) {
       toast.error('Failed to update collaborator.');
     }
@@ -414,81 +420,79 @@ export default function Leads() {
 
   ////////////////////////////////////// DELETE ////////////////////////////////////
 
-/*  const deleteLead = useCallback((leadToDelete) => {
-    setLead((prevLeads) => prevLeads.filter((c) => c.id !== leadToDelete.id));
-    setLeadDeleted(true);
+/*  const deleteMatierePremiere = useCallback((matierePremiereToDelete) => {
+    setMatierePremiere((prevMatierePremieres) => prevMatierePremieres.filter((c) => c.id !== matierePremiereToDelete.id));
+    setMatierePremiereDeleted(true);
   }, []);*/
 
 
-  const deleteLead = useCallback(async (leadToDelete) => {
+  const deleteMatierePremiere = useCallback(async (matierePremiereToDelete) => {
     try {
-      const response = await LeadApi.deleteLeadRequest(leadToDelete._id);
-      if (response) {
-        setLead((prevLeads) =>
-            prevLeads.filter((c) => c._id !== leadToDelete._id)
+      const response = await MatierePremiereAPI.deleteMatierePremiereRequest(matierePremiereToDelete.id);
+    
+
+     
+        setMatierePremiere((prevMatierePremieres) =>
+            prevMatierePremieres.filter((c) => c.id !== matierePremiereToDelete.id)
         );
-        setLeadDeleted(true);
-        toast.success('Lead deleted successfully.');
-      } else {
-        toast.error('Failed to delete Lead.');
-      }
+        setMatierePremiereDeleted(true);
+
     } catch (error) {
-      toast.error('Failed to delete Lead.');
+      toast.error('Failed to delete MatierePremiere.');
     }
   }, []);
 
 
-  const handleDeleteLead = useCallback(() => {
-    if (leadToDelete) {
-      deleteLead(leadToDelete);
+  const handleDeleteMatierePremiere = useCallback(() => {
+    if (matierePremiereToDelete) {
+      console.log("matierePremiere to deleteeeee",matierePremiereToDelete)
+      deleteMatierePremiere(matierePremiereToDelete);
       setDeleteModal(false);
     }
-  }, [leadToDelete, deleteLead]);
+  }, [matierePremiereToDelete, deleteMatierePremiere]);
 
-  const onClickDelete = (leads) => {
-    setLeadToDelete(leads);
+  const onClickDelete = (matierePremieres) => {
+    setMatierePremiereToDelete(matierePremieres);
     setDeleteModal(true);
   };
 
   useEffect(() => {
-    if (leadToDelete) {
-      //deleteLead(leadToDelete); Cz I think is running the deletion twice
-      setLeadToDelete(null);
+    if (matierePremiereToDelete) {
+      //deleteMatierePremiere(matierePremiereToDelete); Cz I think is running the deletion twice
+      setMatierePremiereToDelete(null);
     }
-  }, [leadDeleted]);
+  }, [matierePremiereDeleted]);
 
   //////////////////////////////////////   EXPORT  ////////////////////////////////////
 
   const headers = [
-    { id: "leadId", displayName: "Lead ID" },
+    { id: "matierePremiereId", displayName: "MatierePremiere ID" },
     { id: "name", displayName: "Name" },
-    { id: "username", displayName: "Username" },
-    { id: "email", displayName: "Email" },
-    { id: "phone", displayName: "Phone" },
-    { id: "creationDate", displayName: "Creation Date" },
+    { id: "quantity", displayName: "Quantity" },
+    { id: "unit", displayName: "Unit" },
   ];
 
   //////////////////////////////////////   STATUSES  ////////////////////////////////////
 
-  const StatusBadge = ({ status }) => {
-    switch (status) {
-      case "ACTIVE":
-        return (
-          <span className="badge bg-success text-uppercase me-1">{status}</span>
-        );
-      case "INACTIVE":
-        return (
-          <span className="badge bg-danger text-uppercase me-1">{status}</span>
-        );
+  // const StatusBadge = ({ status }) => {
+  //   switch (status) {
+  //     case "ACTIVE":
+  //       return (
+  //         <span className="badge bg-success text-uppercase me-1">{status}</span>
+  //       );
+  //     case "INACTIVE":
+  //       return (
+  //         <span className="badge bg-danger text-uppercase me-1">{status}</span>
+  //       );
 
-      default:
-        return (
-          <span className="badge bg-secondary text-uppercase me-1">
-            {status}
-          </span>
-        );
-    }
-  };
+  //     default:
+  //       return (
+  //         <span className="badge bg-secondary text-uppercase me-1">
+  //           {status}
+  //         </span>
+  //       );
+  //   }
+  // };
 
   /////////////////////////////////////////////////////////////////////////////////////
   // validation
@@ -496,44 +500,47 @@ export default function Leads() {
     enableReinitialize: true,
 
     initialValues: {
-      _id: selectedLead ? selectedLead._id : "0",
-      name: (selectedLead && selectedLead.name) || "",
-      username: (selectedLead && selectedLead.username) || "",
-      email: (selectedLead && selectedLead.email) || "",
-      phone: (selectedLead && selectedLead.phone) || "",
-      statuses: (selectedLead && selectedLead.statuses) || [],
+      id: selectedMatierePremiere ? selectedMatierePremiere.id : "0",
+      name: (selectedMatierePremiere && selectedMatierePremiere.name) || "",
+      quantity: (selectedMatierePremiere && selectedMatierePremiere.quantity) || "",
+      unit: (selectedMatierePremiere && selectedMatierePremiere.unit) || "",
+      priceU: (selectedMatierePremiere && selectedMatierePremiere.priceU) || "",
     },
 
     validationSchema: Yup.object({
       name: Yup.string().required("Please Enter Name"),
-      username: Yup.string().required("Please Enter Username"),
-      email: Yup.string().required("Please Enter Email"),
-      phone: Yup.string().required("Please Enter Phone"),
+      quantity: Yup.string().required("Please Enter Quantity"),
+      unit: Yup.string().required("Please Enter Unit"),
+      priceU: Yup.string().required("Please Enter Price for each UNit"),
+
     }),
     onSubmit: (values) => {
+      console.log("selected matierePremiere to update",selectedMatierePremiere)
       if (isEdit) {
-        const updateLead = {
-          _id: selectedLead ? selectedLead._id : 0,
+        const updateMatierePremiere = {
+          id: selectedMatierePremiere ? selectedMatierePremiere.id : 0,
           name: values.name,
-          username: values.username,
-          email: values.email,
-          phoneNumber: values.phone,
-          status: assignStatus[0]?.value,
+          quantity: values.quantity,
+          unit: values.unit,
+          priceU: values.priceU,
+
         };
-        console.log("id", selectedLead._id);
-        const id = selectedLead._id;
-        HandleupdateLead( id , updateLead);
+        console.log(updateMatierePremiere.id)
+        const id = selectedMatierePremiere.id;
+        HandleupdateMatierePremiere( id , updateMatierePremiere);
         validation.resetForm();
       } else {
-        const newLead = {
-          // _id: (Math.floor(Math.random() * 10) + 20).toString(),
+        const newMatierePremiere = {
+          // id: (Math.floor(Math.random() * 10) + 20).toString(),
           name: values["name"],
-          username: values["username"],
-          email: values["email"],
-          phoneNumber: values["phone"],
-          status: assignStatus[0]?.value,
+          quantity: values["quantity"],
+          unit: values["unit"],
+          priceU: values["priceU"],
+
+
         };
-        addLead(newLead);
+        console.log("new matierePremiere", newMatierePremiere);
+        addMatierePremiere(newMatierePremiere);
         validation.resetForm();
       }
     },
@@ -573,63 +580,26 @@ export default function Leads() {
         </div>
       ),
     },
-    {
-      header: "Username",
-     //accessorKey: "username",
-       accessorKey: "loginId",
-      enableColumnFilter: false,
-    },
-    {
-      header: "Email ID",
-      accessorKey: "email",
-      enableColumnFilter: false,
-    },
-    {
-      header: "Phone No",
-      //accessorKey: "phone",
-      accessorKey: "phoneNumber",
-      enableColumnFilter: false,
-    },
-    {
-      header: "Status",
-      accessorKey: "statuses",
-      enableColumnFilter: false,
-      cell: (cell) => (
-        <>
-          {cell.getValue().map((item, key) => (
-            <StatusBadge status={item.label} key={key} />
-          ))}
-        </>
-      ),
-      sortingFn: (rowA, rowB) => {
-        const statusOrder = { ADMIN: 0, INACTIVE: 1 };
 
-        const statusA = rowA.original.statuses.find(
-          (status) => status.value in statusOrder
-        );
-        const statusB = rowB.original.statuses.find(
-          (status) => status.value in statusOrder
-        );
-
-        const orderA = statusA ? statusOrder[statusA.value] : Infinity;
-        const orderB = statusB ? statusOrder[statusB.value] : Infinity;
-
-        return orderA - orderB;
-      },
+    {
+      header: "Quantity ID",
+      accessorKey: "quantity",
+      enableColumnFilter: false,
     },
     {
-      header: "Creation Date",
-      accessorKey: "creationDate",
+      header: "Unit",
+      //accessorKey: "unit",
+      accessorKey: "unit",
       enableColumnFilter: false,
-      cell: (cell) => {
-        const value = cell.getValue();
-        if (value) {
-          return handleValidDate(value);
-        } else {
-          return "No creation date";
-        }
-      },
     },
+    {
+      header: "Prix Unitaire",
+      //accessorKey: "unit",
+      accessorKey: "priceU",
+      enableColumnFilter: false,
+    },
+  
+   
    /*{
       header: "Last Activity",
       //accessorKey: "last_activity",
@@ -644,27 +614,27 @@ export default function Leads() {
         </>
       ),
     },*/
-    {
-      header: "Last Activity",
-      accessorKey: "lastActivity",
-      enableColumnFilter: false,
-      cell: (cell) => {
-        const value = cell.getValue();
-        if (value) {
-          const [date, time] = value.split("T");
-          return (
-              <>
-                {handleValidDate(date)},{" "}
-                <small className="text-muted">
-                  {handleValidTime(time)}
-                </small>
-              </>
-          );
-        } else {
-          return null;
-        }
-      },
-    },
+    // {
+    //   header: "Last Activity",
+    //   accessorKey: "lastActivity",
+    //   enableColumnFilter: false,
+    //   cell: (cell) => {
+    //     const value = cell.getValue();
+    //     if (value) {
+    //       const [date, time] = value.split("T");
+    //       return (
+    //           <>
+    //             {handleValidDate(date)},{" "}
+    //             <small className="text-muted">
+    //               {handleValidTime(time)}
+    //             </small>
+    //           </>
+    //       );
+    //     } else {
+    //       return null;
+    //     }
+    //   },
+    // },
 
     {
       header: "Action",
@@ -676,8 +646,8 @@ export default function Leads() {
               className="dropdown-item"
               href="#"
               onClick={() => {
-                const leadData = cellProps.row.original;
-                setInfo(leadData);
+                const matierePremiereData = cellProps.row.original;
+                setInfo(matierePremiereData);
                 toggleViewModal();
               }}
               style={{
@@ -695,7 +665,7 @@ export default function Leads() {
             <div
               className="dropdown-item edit-item-btn"
               href="#"
-              onClick={() => handleLeadClick(cellProps.row.original)}
+              onClick={() => handleMatierePremiereClick(cellProps.row.original)}
             >
               <i className="ri-pencil-fill align-bottom me-2 text-muted"></i>
             </div>
@@ -707,8 +677,9 @@ export default function Leads() {
               className="dropdown-item remove-item-btn"
               href="#"
               onClick={() => {
-                const leadData = cellProps.row.original;
-                onClickDelete(leadData);
+                const matierePremiereData = cellProps.row.original;
+                console.log("matierePremiere date delte",matierePremiereData)
+                onClickDelete(matierePremiereData);
               }}
             >
               <i className="ri-delete-bin-fill align-bottom me-2 text-muted"></i>{" "}
@@ -735,7 +706,7 @@ export default function Leads() {
   const checkedAll = useCallback(() => {
     const checkall = document.getElementById("checkBoxAll");
     if (checkall.checked) {
-      const allIds = leads.map((item) => item.id);
+      const allIds = matierePremieres.map((item) => item.id);
       setSelectedCheckBoxDelete(allIds);
       setIsMultiDeleteButton(true);
       console.log(allIds);
@@ -743,14 +714,14 @@ export default function Leads() {
       setSelectedCheckBoxDelete([]);
       setIsMultiDeleteButton(false);
     }
-  }, [leads]);
+  }, [matierePremieres]);
 
   const deleteMultiple = useCallback(() => {
-    setLead((prevLeads) => {
-      const updatedLeads = prevLeads.filter(
+    setMatierePremiere((prevMatierePremieres) => {
+      const updatedMatierePremieres = prevMatierePremieres.filter(
         (c) => !selectedCheckBoxDelete.includes(c.id)
       );
-      return updatedLeads;
+      return updatedMatierePremieres;
     });
     setIsMultiDeleteButton(false);
     setSelectedCheckBoxDelete([]);
@@ -759,11 +730,11 @@ export default function Leads() {
   }, [selectedCheckBoxDelete]);
 
   useEffect(() => {
-    if (leadDeleted) {
-      setLeadToDelete(null);
-      setLeadDeleted(false);
+    if (matierePremiereDeleted) {
+      setMatierePremiereToDelete(null);
+      setMatierePremiereDeleted(false);
     }
-  }, [leadDeleted]);
+  }, [matierePremiereDeleted]);
 
   return (
     <React.Fragment>
@@ -771,21 +742,21 @@ export default function Leads() {
         <ExportCSVModal
           show={isExportCSV}
           onCloseClick={() => setIsExportCSV(false)}
-          data={leads.map((lead) => ({
-            leadId: String(lead.leadId),
-            name: String(lead.name),
-            username: String(lead.username),
-            email: String(lead.email),
-            phone: String(lead.phone),
-            creationDate: String(lead.creationDate),
+          data={matierePremieres.map((matierePremiere) => ({
+            matierePremiereId: String(matierePremiere.matierePremiereId),
+            name: String(matierePremiere.name),
+            quantity: String(matierePremiere.quantity),
+            unit: String(matierePremiere.unit),
+            priceU: String(matierePremiere.priceU),
+
           }))}
           headers={headers}
-          filename={"Leads"}
+          filename={"MatierePremieres"}
         />
 
         <DeleteModal
           show={deleteModal}
-          onDeleteClick={handleDeleteLead}
+          onDeleteClick={handleDeleteMatierePremiere}
           onCloseClick={() => setDeleteModal(false)}
         />
         <DeleteModal
@@ -797,7 +768,7 @@ export default function Leads() {
           onCloseClick={() => setDeleteModalMulti(false)}
         />
         <Container fluid>
-          <BreadCrumb title="Leads" pageTitle="CRM" />
+          <BreadCrumb title="MatierePremieres" pageTitle="CRM" />
           <Row>
             <Col lg={12}>
               <Card>
@@ -811,12 +782,12 @@ export default function Leads() {
                         }}
                       >
                         <i className="ri-add-fill me-1 align-bottom"></i>
-                        Add Leads
+                        Add MatierePremieres
                       </button>
                     </div>
                     <div className="flex-shrink-0">
                       <div className="hstack text-nowrap gap-2">
-                        {/* :::::::::::::::::::::::::: DELETE MULTIPLE LEADS ::::::::::::::::::: */}
+                        {/* :::::::::::::::::::::::::: DELETE MULTIPLE CLIENTS ::::::::::::::::::: */}
                         {isMultiDeleteButton && (
                           <button
                             className="btn btn-secondary"
@@ -825,10 +796,10 @@ export default function Leads() {
                             <i className="ri-delete-bin-2-line"></i>
                           </button>
                         )}
-                        <button className="btn btn-danger">
+                        {/* <button className="btn btn-danger">
                           <i className="ri-filter-2-line me-1 align-bottom"></i>{" "}
                           Filters
-                        </button>
+                        </button> */}
                         <button
                           className="btn btn-soft-success"
                           onClick={() => setIsExportCSV(true)}
@@ -841,15 +812,15 @@ export default function Leads() {
                 </CardHeader>
               </Card>
             </Col>
-            <Col xxl={9}>
+            <Col xxl={12}>
               <Card id="contactList">
                 <CardBody className="pt-0">
-                  {/* :::::::::::::::::::::: LIST LEADS :::::::::::::::::::::::::: */}
-                  {/*{leads && leads.length ? (*/}
+                  {/* :::::::::::::::::::::: LIST CLIENTS :::::::::::::::::::::::::: */}
+                  {/*{matierePremieres && matierePremieres.length ? (*/}
                   {isLoiding  ? ( <Loader/> ) : (
                     <TableContainer
                       columns={columns}
-                      data={leads || []}
+                      data={matierePremieres || []}
                       isGlobalFilter={true}
                       isAddUserList={false}
                       customPageSize={8}
@@ -857,9 +828,9 @@ export default function Leads() {
                       divClass="table-responsive table-card mb-3"
                       tableClass="align-middle table-nowrap"
                       theadClass="table-light"
-                      handleLeadClick={handleLeadClicks}
-                      isLeadsFilter={true}
-                      SearchPlaceholder="Search for leads..."
+                      handleMatierePremiereClick={handleMatierePremiereClicks}
+                      isMatierePremieresFilter={true}
+                      SearchPlaceholder="Search for matierePremieres..."
                     />
                     )}
             {/*      ) : (
@@ -869,7 +840,7 @@ export default function Leads() {
                   {/* :::::::::::::::::::::: ADD / UPDATE MODAL :::::::::::::::::::::::::: */}
                   <Modal id="showModal" isOpen={modal} toggle={toggle} centered>
                     <ModalHeader className="bg-info-subtle p-3" toggle={toggle}>
-                      {!!isEdit ? "Edit Lead" : "Add Lead"}
+                      {!!isEdit ? "Edit MatierePremiere" : "Add MatierePremiere"}
                     </ModalHeader>
                     <Form
                       className="tablelist-form"
@@ -917,37 +888,38 @@ export default function Leads() {
                               ) : null}
                             </div>
                           </Col>
+                         
                           <Col lg={12}>
                             <div>
                               <Label
-                                htmlFor="username-field"
+                                htmlFor="quantityid-field"
                                 className="form-label"
                               >
-                                Username
+                                Quantity ID
                               </Label>
                               <Input
-                                name="username"
-                                id="username-field"
+                                name="quantity"
+                                id="quantityid-field"
                                 className="form-control"
-                                placeholder="Enter Username"
+                                placeholder="Enter Quantity"
                                 type="text"
                                 validate={{
                                   required: { value: true },
                                 }}
                                 onChange={validation.handleChange}
                                 onBlur={validation.handleBlur}
-                                value={validation.values.username || ""}
+                                value={validation.values.quantity || ""}
                                 invalid={
-                                  validation.touched.username &&
-                                  validation.errors.username
+                                  validation.touched.quantity &&
+                                  validation.errors.quantity
                                     ? true
                                     : false
                                 }
                               />
-                              {validation.touched.username &&
-                              validation.errors.username ? (
+                              {validation.touched.quantity &&
+                              validation.errors.quantity ? (
                                 <FormFeedback type="invalid">
-                                  {validation.errors.username}
+                                  {validation.errors.quantity}
                                 </FormFeedback>
                               ) : null}
                             </div>
@@ -955,34 +927,34 @@ export default function Leads() {
                           <Col lg={12}>
                             <div>
                               <Label
-                                htmlFor="email_id-field"
+                                htmlFor="priceU-field"
                                 className="form-label"
                               >
-                                Email ID
+                                Prix Unitaire
                               </Label>
                               <Input
-                                name="email"
-                                id="email_id-field"
+                                name="priceU"
+                                id="priceU-field"
                                 className="form-control"
-                                placeholder="Enter Email"
+                                placeholder="Enter Prix Unitaire"
                                 type="text"
                                 validate={{
                                   required: { value: true },
                                 }}
                                 onChange={validation.handleChange}
                                 onBlur={validation.handleBlur}
-                                value={validation.values.email || ""}
+                                value={validation.values.priceU || ""}
                                 invalid={
-                                  validation.touched.email &&
-                                  validation.errors.email
+                                  validation.touched.priceU &&
+                                  validation.errors.priceU
                                     ? true
                                     : false
                                 }
                               />
-                              {validation.touched.email &&
-                              validation.errors.email ? (
+                              {validation.touched.priceU &&
+                              validation.errors.priceU ? (
                                 <FormFeedback type="invalid">
-                                  {validation.errors.email}
+                                  {validation.errors.priceU}
                                 </FormFeedback>
                               ) : null}
                             </div>
@@ -990,64 +962,39 @@ export default function Leads() {
                           <Col lg={12}>
                             <div>
                               <Label
-                                htmlFor="phone-field"
+                                htmlFor="unit-field"
                                 className="form-label"
                               >
-                                Phone
+                                Unit
                               </Label>
                               <Input
-                                name="phone"
-                                id="phone-field"
+                                name="unit"
+                                id="unit-field"
                                 className="form-control"
-                                placeholder="Enter Phone No."
+                                placeholder="Enter Unit No."
                                 type="text"
                                 validate={{
                                   required: { value: true },
                                 }}
                                 onChange={validation.handleChange}
                                 onBlur={validation.handleBlur}
-                                value={validation.values.phone || ""}
+                                value={validation.values.unit || ""}
                                 invalid={
-                                  validation.touched.phone &&
-                                  validation.errors.phone
+                                  validation.touched.unit &&
+                                  validation.errors.unit
                                     ? true
                                     : false
                                 }
                               />
-                              {validation.touched.phone &&
-                              validation.errors.phone ? (
+                              {validation.touched.unit &&
+                              validation.errors.unit ? (
                                 <FormFeedback type="invalid">
-                                  {validation.errors.phone}
+                                  {validation.errors.unit}
                                 </FormFeedback>
                               ) : null}
                             </div>
                           </Col>
-                          <Col lg={12}>
-                            <div>
-                              <Label
-                                htmlFor="statusinput-choices"
-                                className="form-label font-size-13"
-                              >
-                                Status
-                              </Label>
-                              <Select
-                                isMulti
-                                value={status}
-                                onChange={(e) => {
-                                  handlesStatus(e);
-                                }}
-                                className="mb-0"
-                                options={statuses}
-                                id="statusinput-choices"
-                              />
-                              {validation.touched.statuses &&
-                              validation.errors.statuses ? (
-                                <FormFeedback type="invalid">
-                                  {validation.errors.statuses}
-                                </FormFeedback>
-                              ) : null}
-                            </div>
-                          </Col>
+                          
                         </Row>
                       </ModalBody>
                       <ModalFooter>
@@ -1066,7 +1013,7 @@ export default function Leads() {
                             className="btn btn-success"
                             id="add-btn"
                           >
-                            {!!isEdit ? "Update" : "Add Lead"}
+                            {!!isEdit ? "Update" : "Add MatierePremiere"}
                           </button>
                         </div>
                       </ModalFooter>
@@ -1077,19 +1024,19 @@ export default function Leads() {
               </Card>
             </Col>
 
-            {/* :::::::::::::::::::::: VIEW Lead :::::::::::::::::::::::::: */}
+            {/* :::::::::::::::::::::: VIEW MatierePremiere :::::::::::::::::::::::::: */}
             <Modal
               id="viewModal"
               isOpen={viewModal}
               toggle={toggleViewModal}
               centered
             >
-              <ModalHeader toggle={toggleViewModal}>View Lead</ModalHeader>
+              <ModalHeader toggle={toggleViewModal}>View MatierePremiere</ModalHeader>
               <ModalBody>
                 <div id="contact-view-detail">
                   <div className="text-center mb-3">
                     <h5 className="mt-4 mb-1">{info.name}</h5>
-                    <p className="text-muted">{info.leadId}</p>
+                    <p className="text-muted">{info.matierePremiereId}</p>
 
                     <ul className="list-inline mb-0">
                       <li className="list-inline-item avatar-xs">
@@ -1097,7 +1044,7 @@ export default function Leads() {
                           to="#"
                           className="avatar-title bg-success-subtle text-success fs-15 rounded"
                         >
-                          <i className="ri-phone-line"></i>
+                          <i className="ri-unit-line"></i>
                         </Link>
                       </li>
                       <li className="list-inline-item avatar-xs">
@@ -1122,47 +1069,16 @@ export default function Leads() {
                     <div className="table-responsive table-card">
                       <Table className="table table-borderless mb-0">
                         <tbody>
+                       
                           <tr>
-                            <td className="fw-medium">Username</td>
-                            <td>{info.username}</td>
+                            <td className="fw-medium">Quantity ID</td>
+                            <td>{info.quantity || "tonyanoble@velzon.com"}</td>
                           </tr>
                           <tr>
-                            <td className="fw-medium">Email ID</td>
-                            <td>{info.email || "tonyanoble@velzon.com"}</td>
+                            <td className="fw-medium">Unit</td>
+                            <td>{info.unitNumber}</td>
                           </tr>
-                          <tr>
-                            <td className="fw-medium">Phone No</td>
-                            <td>{info.phoneNumber}</td>
-                          </tr>
-                          <tr>
-                            <td className="fw-medium">Creation Date</td>
-                            <td>{info.creationDate ? handleValidDate(info.creationDate) : "No creation date"}</td>
-                          </tr>
-                          <tr>
-                            <td className="fw-medium">Last Activity</td>
-                            <td>
-                              {info.lastActivity &&
-                              info.lastActivity.length === 2
-                                ? handleValidDate(info.lastActivity[0]) +
-                                  ", " +
-                                  handleValidTime(info.lastActivity[1])
-                                : "No last activity"}
-                            </td>
-                          </tr>
-
-                          <tr>
-                            <td className="fw-medium">Status</td>
-                            <td>
-                              {(info.statuses || []).map((status, key) => (
-                                <span
-                                  className="badge bg-primary-subtle text-primary me-1"
-                                  key={key}
-                                >
-                                  {status.label || status.value}
-                                </span>
-                              ))}
-                            </td>
-                          </tr>
+                         
                         </tbody>
                       </Table>
                     </div>

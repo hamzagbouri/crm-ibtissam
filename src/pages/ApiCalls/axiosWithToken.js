@@ -2,8 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 const axiosWithToken = axios.create({
-
-    baseURL: 'http://localhost:8080/',
+    baseURL: 'http://localhost:8000/api/',
     headers: {
         'Content-Type': 'application/json',
     },
@@ -11,12 +10,10 @@ const axiosWithToken = axios.create({
 
 axiosWithToken.interceptors.request.use(
     (config) => {
-        console.log('IM IN AXIOS WITH TOLEN ');
         const token = Cookies.get('accessToken');
-         console.log('Adding token to headers:', token);
-         config.headers.Authorization = `Bearer ${token}`;
-        console.log('Authorization header after:', config.headers.Authorization);
-
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
         return config;
     },
     (error) => {

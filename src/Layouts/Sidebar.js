@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import SimpleBar from "simplebar-react";
 //import logo
-import logoSm from "../assets/images/logo-sm.png";
+import logoSm from "../assets/images/logo-smm.png";
 import logoDark from "../assets/images/logo-dark.png";
 import logoLight from "../assets/images/logo-light.png";
 
@@ -43,7 +43,7 @@ const Sidebar = ({ layoutType }) => {
               <img src={logoSm} alt="" height="22" />
             </span>
             <span className="logo-lg">
-              <img src={logoDark} alt="" height="17" />
+              <img src={logoDark} alt="" height="100" />
             </span>
           </Link>
 
@@ -52,7 +52,7 @@ const Sidebar = ({ layoutType }) => {
               <img src={logoSm} alt="" height="22" />
             </span>
             <span className="logo-lg">
-              <img src={logoLight} alt="" height="17" />
+              <img src={logoLight} alt="" height="100" />
             </span>
           </Link>
           <button

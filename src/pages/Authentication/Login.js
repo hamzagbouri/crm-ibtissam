@@ -60,10 +60,10 @@ const Login = () => {
                                 <div className="text-center mt-sm-5 mb-4 text-white-50">
                                     <div>
                                         <Link to="/" className="d-inline-block auth-logo">
-                                            <img src={logoLight} alt="" height="20" />
+                                            <img src={logoLight} alt="" height="100" />
                                         </Link>
                                     </div>
-                                    <p className="mt-3 fs-15 fw-medium">Premium Admin & Dashboard Template</p>
+                                    <p className="mt-3 fs-15 fw-medium">Articode</p>
                                 </div>
                             </Col>
                         </Row>
@@ -73,7 +73,7 @@ const Login = () => {
                                     <CardBody className="p-4">
                                         <div className="text-center mt-2">
                                             <h5 className="text-primary">Welcome Back !</h5>
-                                            <p className="text-muted">Sign in to continue to Velzon.</p>
+                                            <p className="text-muted">Sign in to continue .</p>
                                         </div>
                                         {errorMsg && <Alert color="danger">{errorMsg}</Alert>}
                                         <div className="p-2 mt-4">

@@ -5,7 +5,7 @@ const Navdata = () => {
   const history = useNavigate();
   //state data
   const [isDashboard, setIsDashboard] = useState(false);
-  const [isApps, setIsApps] = useState(false);
+  const [isStocks, setIsStocks] = useState(false);
   const [isAuth, setIsAuth] = useState(false);
   const [isPages, setIsPages] = useState(false);
   const [isBaseUi, setIsBaseUi] = useState(false);
@@ -20,7 +20,7 @@ const Navdata = () => {
   //Calender
   const [isCalender, setCalender] = useState(false);
 
-  // Apps
+  // Stocks
   const [isEmail, setEmail] = useState(false);
   const [isSubEmail, setSubEmail] = useState(false);
   const [isEcommerce, setIsEcommerce] = useState(false);
@@ -78,8 +78,8 @@ const Navdata = () => {
     if (iscurrentState !== "Dashboard") {
       setIsDashboard(false);
     }
-    if (iscurrentState !== "Apps") {
-      setIsApps(false);
+    if (iscurrentState !== "Stocks") {
+      setIsStocks(false);
     }
     if (iscurrentState !== "Auth") {
       setIsAuth(false);
@@ -146,7 +146,7 @@ const Navdata = () => {
     history,
     iscurrentState,
     isDashboard,
-    isApps,
+    isStocks,
     isAuth,
     isPages,
     isBaseUi,
@@ -225,74 +225,137 @@ const Navdata = () => {
         setIscurrentState("Analytics");
       },
     },
-    {
-      id: "collaborators",
-      label: "Collaborators",
-      icon: "bx bx-user-circle",
-      link: "/collaborators",
-      click: function (e) {
-        e.preventDefault();
-        setIscurrentState("Collaborators");
-      },
-    },
-    {
-      id: "assistant",
-      label: "Assistant",
-      icon: "ri-customer-service-line",
-      link: "/assistant",
-      click: function (e) {
-        e.preventDefault();
-        setIscurrentState("Assistant");
-      },
-    },
-    {
-      id: "leads",
-      label: "Leads",
-      icon: "bx bx-group",
-      link: "/leads",
-      click: function (e) {
-        e.preventDefault();
-        setIscurrentState("Leads");
-      },
-    },
-    {
-      id: "reports",
-      label: "Reports",
-      icon: "ri-file-copy-2-line",
-      link: "/reports",
-      click: function (e) {
-        e.preventDefault();
-        setIscurrentState("Reports");
-      },
-    },
-    {
-      id: "help",
-      label: "Help",
-      icon: "ri-question-line",
-      link: "/help",
-      click: function (e) {
-        e.preventDefault();
-        setIscurrentState("Help");
-      },
-    },
     // {
-    //   id: "apps",
-    //   label: "Apps",
-    //   icon: "ri-apps-2-line",
+    //   id: "collaborators",
+    //   label: "Collaborators",
+    //   icon: "bx bx-user-circle",
+    //   link: "/collaborators",
+    //   click: function (e) {
+    //     e.preventDefault();
+    //     setIscurrentState("Collaborators");
+    //   },
+    // },
+    // {
+    //   id: "assistant",
+    //   label: "Assistant",
+    //   icon: "ri-customer-service-line",
+    //   link: "/assistant",
+    //   click: function (e) {
+    //     e.preventDefault();
+    //     setIscurrentState("Assistant");
+    //   },
+    // },
+    {
+      id: "clients",
+      label: "Clients",
+      icon: "bx bx-group",
+      link: "/clients",
+      click: function (e) {
+        e.preventDefault();
+        setIscurrentState("Clients");
+      },
+    },
+    {
+      id: "stocks",
+        label: "Stocks",
+        icon: "ri-apps-2-line",
+        link: "/#",
+        click: function (e) {
+          e.preventDefault();
+          setIsStocks(!isStocks);
+          setIscurrentState("Stocks");
+          updateIconSidebar(e);
+        },
+        stateVariables: isStocks,
+        subItems: [
+          {
+       id: "matierePremiere",
+              label: "Matiere Premiere",
+              link: "/matiere-premiere",
+              parentId: "stocks",
+            },
+            {
+              id: "produitFini",
+                     label: "Produit Fini",
+                     link: "/produit",
+                     parentId: "stocks",
+                   },
+        ]},
+    // {
+    //   id: "matierePremieres",
+    //   label: "Matiere Premiere",
+    //   icon: "bx bx-group",
+    //   link: "/matiere-premiere",
+    //   click: function (e) {
+    //     e.preventDefault();
+    //     setIscurrentState("Matiere Premiere");
+    //   },
+    // },
+    
+    // {
+    //   id: "produits",
+    //   label: "Produits",
+    //   icon: "ri-file-copy-2-line",
+    //   link: "/produit",
+    //   click: function (e) {
+    //     e.preventDefault();
+    //     setIscurrentState("Produits");
+    //   },
+    // },
+    {
+      id: "commandes",
+      label: "Commande",
+      icon: "bx bx-group",
+      link: "/commande",
+      click: function (e) {
+        e.preventDefault();
+        setIscurrentState("Commande");
+      },
+    },
+    {
+      id: "mouvementStock",
+      label: "Mouvement Stock",
+      icon: "bx bx-group",
+      link: "/mouvement",
+      click: function (e) {
+        e.preventDefault();
+        setIscurrentState("mouvement Stock");
+      },
+    },
+    
+    // {
+    //   id: "help",
+    //   label: "Help",
+    //   icon: "ri-question-line",
+    //   link: "/help",
+    //   click: function (e) {
+    //     e.preventDefault();
+    //     setIscurrentState("Help");
+    //   },
+    // },
+    //  id: "filemanager",
+    //       label: "File Manager",
+    //       link: "/stocks-file-manager",
+    //       parentId: "stocks",
+    //     },
+    // {
+    //   id: "stocks",
+    //   label: "Stocks",
+    //   icon: "ri-stocks-2-line",
     //   link: "/#",
     //   click: function (e) {
     //     e.preventDefault();
-    //     setIsApps(!isApps);
-    //     setIscurrentState("Apps");
+    //     setIsStocks(!isStocks);
+    //     setIscurrentState("Stocks");
     //     updateIconSidebar(e);
     //   },
-    //   stateVariables: isApps,
+    //   stateVariables: isStocks,
     //   subItems: [
     //     {
     //       id: "calendar",
     //       label: "Calendar",
     //       link: "/#",
-    //       parentId: "apps",
+    //       parentId: "stocks",
     //       isChildItem: true,
     //       click: function (e) {
     //         e.preventDefault();
@@ -303,28 +366,28 @@ const Navdata = () => {
     //         {
     //           id: 1,
     //           label: "Main Calender",
-    //           link: "/apps-calendar",
-    //           parentId: "apps",
+    //           link: "/stocks-calendar",
+    //           parentId: "stocks",
     //         },
     //         {
     //           id: 2,
     //           label: "Month Grid",
-    //           link: "/apps-calendar-month-grid",
-    //           parentId: "apps",
+    //           link: "/stocks-calendar-month-grid",
+    //           parentId: "stocks",
     //         },
     //       ],
     //     },
     //     {
     //       id: "chat",
     //       label: "Chat",
-    //       link: "/apps-chat",
-    //       parentId: "apps",
+    //       link: "/stocks-chat",
+    //       parentId: "stocks",
     //     },
     //     {
     //       id: "mailbox",
     //       label: "Email",
     //       link: "/#",
-    //       parentId: "apps",
+    //       parentId: "stocks",
     //       isChildItem: true,
     //       click: function (e) {
     //         e.preventDefault();
@@ -335,14 +398,14 @@ const Navdata = () => {
     //         {
     //           id: 1,
     //           label: "Mailbox",
-    //           link: "/apps-mailbox",
-    //           parentId: "apps",
+    //           link: "/stocks-mailbox",
+    //           parentId: "stocks",
     //         },
     //         {
     //           id: 2,
     //           label: "Email Templates",
     //           link: "/#",
-    //           parentId: "apps",
+    //           parentId: "stocks",
     //           isChildItem: true,
     //           stateVariables: isSubEmail,
     //           click: function (e) {
@@ -353,21 +416,21 @@ const Navdata = () => {
     //             {
     //               id: 2,
     //               label: "Basic Action",
-    //               link: "/apps-email-basic",
-    //               parentId: "apps",
+    //               link: "/stocks-email-basic",
+    //               parentId: "stocks",
     //             },
     //             {
     //               id: 3,
     //               label: "Ecommerce Action",
-    //               link: "/apps-email-ecommerce",
-    //               parentId: "apps",
+    //               link: "/stocks-email-ecommerce",
+    //               parentId: "stocks",
     //             },
     //           ],
     //         },
     //       ],
     //     },
     //     {
-    //       id: "appsecommerce",
+    //       id: "stocksecommerce",
     //       label: "Ecommerce",
     //       link: "/#",
     //       isChildItem: true,
@@ -375,73 +438,73 @@ const Navdata = () => {
     //         e.preventDefault();
     //         setIsEcommerce(!isEcommerce);
     //       },
-    //       parentId: "apps",
+    //       parentId: "stocks",
     //       stateVariables: isEcommerce,
     //       childItems: [
     //         {
     //           id: 1,
     //           label: "Products",
-    //           link: "/apps-ecommerce-products",
-    //           parentId: "apps",
+    //           link: "/stocks-ecommerce-products",
+    //           parentId: "stocks",
     //         },
     //         {
     //           id: 2,
     //           label: "Product Details",
-    //           link: "/apps-ecommerce-product-details",
-    //           parentId: "apps",
+    //           link: "/stocks-ecommerce-product-details",
+    //           parentId: "stocks",
     //         },
     //         {
     //           id: 3,
     //           label: "Create Product",
-    //           link: "/apps-ecommerce-add-product",
-    //           parentId: "apps",
+    //           link: "/stocks-ecommerce-add-product",
+    //           parentId: "stocks",
     //         },
     //         {
     //           id: 4,
     //           label: "Orders",
-    //           link: "/apps-ecommerce-orders",
-    //           parentId: "apps",
+    //           link: "/stocks-ecommerce-orders",
+    //           parentId: "stocks",
     //         },
     //         {
     //           id: 5,
     //           label: "Order Details",
-    //           link: "/apps-ecommerce-order-details",
-    //           parentId: "apps",
+    //           link: "/stocks-ecommerce-order-details",
+    //           parentId: "stocks",
     //         },
     //         {
     //           id: 6,
     //           label: "Customers",
-    //           link: "/apps-ecommerce-customers",
-    //           parentId: "apps",
+    //           link: "/stocks-ecommerce-customers",
+    //           parentId: "stocks",
     //         },
     //         {
     //           id: 7,
     //           label: "Shopping Cart",
-    //           link: "/apps-ecommerce-cart",
-    //           parentId: "apps",
+    //           link: "/stocks-ecommerce-cart",
+    //           parentId: "stocks",
     //         },
     //         {
     //           id: 8,
     //           label: "Checkout",
-    //           link: "/apps-ecommerce-checkout",
-    //           parentId: "apps",
+    //           link: "/stocks-ecommerce-checkout",
+    //           parentId: "stocks",
     //         },
     //         {
     //           id: 9,
     //           label: "Sellers",
-    //           link: "/apps-ecommerce-sellers",
-    //           parentId: "apps",
+    //           link: "/stocks-ecommerce-sellers",
+    //           parentId: "stocks",
     //         },
     //         {
     //           id: 10,
     //           label: "Seller Details",
-    //           link: "/apps-ecommerce-seller-details",
-    //           parentId: "apps",
+    //           link: "/stocks-ecommerce-seller-details",
+    //           parentId: "stocks",
     //         },
     //       ],
     //     },
     //     {
-    //       id: "appsprojects",
+    //       id: "stocksprojects",
     //       label: "Projects",
     //       link: "/#",
     //       isChildItem: true,
@@ -449,26 +512,26 @@ const Navdata = () => {
     //         e.preventDefault();
     //         setIsProjects(!isProjects);
     //       },
-    //       parentId: "apps",
+    //       parentId: "stocks",
     //       stateVariables: isProjects,
     //       childItems: [
     //         {
     //           id: 1,
     //           label: "List",
-    //           link: "/apps-projects-list",
-    //           parentId: "apps",
+    //           link: "/stocks-projects-list",
+    //           parentId: "stocks",
     //         },
     //         {
     //           id: 2,
     //           label: "Overview",
-    //           link: "/apps-projects-overview",
-    //           parentId: "apps",
+    //           link: "/stocks-projects-overview",
+    //           parentId: "stocks",
     //         },
     //         {
     //           id: 3,
     //           label: "Create Project",
-    //           link: "/apps-projects-create",
-    //           parentId: "apps",
+    //           link: "/stocks-projects-create",
+    //           parentId: "stocks",
     //         },
     //       ],
     //     },
@@ -481,31 +544,31 @@ const Navdata = () => {
     //         e.preventDefault();
     //         setIsTasks(!isTasks);
     //       },
-    //       parentId: "apps",
+    //       parentId: "stocks",
     //       stateVariables: isTasks,
     //       childItems: [
     //         {
     //           id: 1,
     //           label: "Kanban Board",
-    //           link: "/apps-tasks-kanban",
-    //           parentId: "apps",
+    //           link: "/stocks-tasks-kanban",
+    //           parentId: "stocks",
     //         },
     //         {
     //           id: 2,
     //           label: "List View",
-    //           link: "/apps-tasks-list-view",
-    //           parentId: "apps",
+    //           link: "/stocks-tasks-list-view",
+    //           parentId: "stocks",
     //         },
     //         {
     //           id: 3,
     //           label: "Task Details",
-    //           link: "/apps-tasks-details",
-    //           parentId: "apps",
+    //           link: "/stocks-tasks-details",
+    //           parentId: "stocks",
     //         },
     //       ],
     //     },
     //     {
-    //       id: "appscrm",
+    //       id: "stockscrm",
     //       label: "CRM",
     //       link: "/#",
     //       isChildItem: true,
@@ -513,17 +576,17 @@ const Navdata = () => {
     //         e.preventDefault();
     //         setIsCRM(!isCRM);
     //       },
-    //       parentId: "apps",
+    //       parentId: "stocks",
     //       stateVariables: isCRM,
     //       childItems: [
-    //         { id: 1, label: "Contacts", link: "/apps-crm-contacts" },
-    //         { id: 2, label: "Companies", link: "/apps-crm-companies" },
-    //         { id: 3, label: "Deals", link: "/apps-crm-deals" },
-    //         { id: 4, label: "Leads", link: "/apps-crm-leads" },
+    //         { id: 1, label: "Contacts", link: "/stocks-crm-contacts" },
+    //         { id: 2, label: "Companies", link: "/stocks-crm-companies" },
+    //         { id: 3, label: "Deals", link: "/stocks-crm-deals" },
+    //         { id: 4, label: "Leads", link: "/stocks-crm-leads" },
     //       ],
     //     },
     //     {
-    //       id: "appscrypto",
+    //       id: "stockscrypto",
     //       label: "Crypto",
     //       link: "/#",
     //       isChildItem: true,
@@ -531,15 +594,15 @@ const Navdata = () => {
     //         e.preventDefault();
     //         setIsCrypto(!isCrypto);
     //       },
-    //       parentId: "apps",
+    //       parentId: "stocks",
     //       stateVariables: isCrypto,
     //       childItems: [
-    //         { id: 1, label: "Transactions", link: "/apps-crypto-transactions" },
-    //         { id: 2, label: "Buy & Sell", link: "/apps-crypto-buy-sell" },
-    //         { id: 3, label: "Orders", link: "/apps-crypto-orders" },
-    //         { id: 4, label: "My Wallet", link: "/apps-crypto-wallet" },
-    //         { id: 5, label: "ICO List", link: "/apps-crypto-ico" },
-    //         { id: 6, label: "KYC Application", link: "/apps-crypto-kyc" },
+    //         { id: 1, label: "Transactions", link: "/stocks-crypto-transactions" },
+    //         { id: 2, label: "Buy & Sell", link: "/stocks-crypto-buy-sell" },
+    //         { id: 3, label: "Orders", link: "/stocks-crypto-orders" },
+    //         { id: 4, label: "My Wallet", link: "/stocks-crypto-wallet" },
+    //         { id: 5, label: "ICO List", link: "/stocks-crypto-ico" },
+    //         { id: 6, label: "KYC Application", link: "/stocks-crypto-kyc" },
     //       ],
     //     },
     //     {
@@ -551,12 +614,12 @@ const Navdata = () => {
     //         e.preventDefault();
     //         setIsInvoices(!isInvoices);
     //       },
-    //       parentId: "apps",
+    //       parentId: "stocks",
     //       stateVariables: isInvoices,
     //       childItems: [
-    //         { id: 1, label: "List View", link: "/apps-invoices-list" },
-    //         { id: 2, label: "Details", link: "/apps-invoices-details" },
-    //         { id: 3, label: "Create Invoice", link: "/apps-invoices-create" },
+    //         { id: 1, label: "List View", link: "/stocks-invoices-list" },
+    //         { id: 2, label: "Details", link: "/stocks-invoices-details" },
+    //         { id: 3, label: "Create Invoice", link: "/stocks-invoices-create" },
     //       ],
     //     },
     //     {
@@ -568,11 +631,11 @@ const Navdata = () => {
     //         e.preventDefault();
     //         setIsSupportTickets(!isSupportTickets);
     //       },
-    //       parentId: "apps",
+    //       parentId: "stocks",
     //       stateVariables: isSupportTickets,
     //       childItems: [
-    //         { id: 1, label: "List View", link: "/apps-tickets-list" },
-    //         { id: 2, label: "Ticket Details", link: "/apps-tickets-details" },
+    //         { id: 1, label: "List View", link: "/stocks-tickets-list" },
+    //         { id: 2, label: "Ticket Details", link: "/stocks-tickets-details" },
     //       ],
     //     },
     //     {
@@ -584,37 +647,37 @@ const Navdata = () => {
     //         e.preventDefault();
     //         setIsNFTMarketplace(!isNFTMarketplace);
     //       },
-    //       parentId: "apps",
+    //       parentId: "stocks",
     //       stateVariables: isNFTMarketplace,
     //       childItems: [
-    //         { id: 1, label: "Marketplace", link: "/apps-nft-marketplace" },
-    //         { id: 2, label: "Explore Now", link: "/apps-nft-explore" },
-    //         { id: 3, label: "Live Auction", link: "/apps-nft-auction" },
-    //         { id: 4, label: "Item Details", link: "/apps-nft-item-details" },
-    //         { id: 5, label: "Collections", link: "/apps-nft-collections" },
-    //         { id: 6, label: "Creators", link: "/apps-nft-creators" },
-    //         { id: 7, label: "Ranking", link: "/apps-nft-ranking" },
-    //         { id: 8, label: "Wallet Connect", link: "/apps-nft-wallet" },
-    //         { id: 9, label: "Create NFT", link: "/apps-nft-create" },
+    //         { id: 1, label: "Marketplace", link: "/stocks-nft-marketplace" },
+    //         { id: 2, label: "Explore Now", link: "/stocks-nft-explore" },
+    //         { id: 3, label: "Live Auction", link: "/stocks-nft-auction" },
+    //         { id: 4, label: "Item Details", link: "/stocks-nft-item-details" },
+    //         { id: 5, label: "Collections", link: "/stocks-nft-collections" },
+    //         { id: 6, label: "Creators", link: "/stocks-nft-creators" },
+    //         { id: 7, label: "Ranking", link: "/stocks-nft-ranking" },
+    //         { id: 8, label: "Wallet Connect", link: "/stocks-nft-wallet" },
+    //         { id: 9, label: "Create NFT", link: "/stocks-nft-create" },
     //       ],
     //     },
     //     {
     //       id: "filemanager",
     //       label: "File Manager",
-    //       link: "/apps-file-manager",
-    //       parentId: "apps",
+    //       link: "/stocks-file-manager",
+    //       parentId: "stocks",
     //     },
     //     {
     //       id: "todo",
     //       label: "To Do",
-    //       link: "/apps-todo",
-    //       parentId: "apps",
+    //       link: "/stocks-todo",
+    //       parentId: "stocks",
     //     },
     //     {
     //       id: "job",
     //       label: "Jobs",
     //       link: "/#",
-    //       parentId: "apps",
+    //       parentId: "stocks",
     //       isChildItem: true,
     //       click: function (e) {
     //         e.preventDefault();
@@ -625,14 +688,14 @@ const Navdata = () => {
     //         {
     //           id: 1,
     //           label: "Statistics",
-    //           link: "/apps-job-statistics",
-    //           parentId: "apps",
+    //           link: "/stocks-job-statistics",
+    //           parentId: "stocks",
     //         },
     //         {
     //           id: 2,
     //           label: "Job Lists",
     //           link: "/#",
-    //           parentId: "apps",
+    //           parentId: "stocks",
     //           isChildItem: true,
     //           stateVariables: isJobList,
     //           click: function (e) {
@@ -643,20 +706,20 @@ const Navdata = () => {
     //             {
     //               id: 1,
     //               label: "List",
-    //               link: "/apps-job-lists",
-    //               parentId: "apps",
+    //               link: "/stocks-job-lists",
+    //               parentId: "stocks",
     //             },
     //             {
     //               id: 2,
     //               label: "Grid",
-    //               link: "/apps-job-grid-lists",
-    //               parentId: "apps",
+    //               link: "/stocks-job-grid-lists",
+    //               parentId: "stocks",
     //             },
     //             {
     //               id: 3,
     //               label: "Overview",
-    //               link: "/apps-job-details",
-    //               parentId: "apps",
+    //               link: "/stocks-job-details",
+    //               parentId: "stocks",
     //             },
     //           ],
     //         },
@@ -664,7 +727,7 @@ const Navdata = () => {
     //           id: 3,
     //           label: "Candidate Lists",
     //           link: "/#",
-    //           parentId: "apps",
+    //           parentId: "stocks",
     //           isChildItem: true,
     //           stateVariables: isCandidateList,
     //           click: function (e) {
@@ -675,48 +738,48 @@ const Navdata = () => {
     //             {
     //               id: 1,
     //               label: "List View",
-    //               link: "/apps-job-candidate-lists",
-    //               parentId: "apps",
+    //               link: "/stocks-job-candidate-lists",
+    //               parentId: "stocks",
     //             },
     //             {
     //               id: 2,
     //               label: "Grid View",
-    //               link: "/apps-job-candidate-grid",
-    //               parentId: "apps",
+    //               link: "/stocks-job-candidate-grid",
+    //               parentId: "stocks",
     //             },
     //           ],
     //         },
     //         {
     //           id: 4,
     //           label: "Application",
-    //           link: "/apps-job-application",
-    //           parentId: "apps",
+    //           link: "/stocks-job-application",
+    //           parentId: "stocks",
     //         },
     //         {
     //           id: 5,
     //           label: "New Job",
-    //           link: "/apps-job-new",
-    //           parentId: "apps",
+    //           link: "/stocks-job-new",
+    //           parentId: "stocks",
     //         },
     //         {
     //           id: 6,
     //           label: "Companies List",
-    //           link: "/apps-job-companies-lists",
-    //           parentId: "apps",
+    //           link: "/stocks-job-companies-lists",
+    //           parentId: "stocks",
     //         },
     //         {
     //           id: 7,
     //           label: "Job Categories",
-    //           link: "/apps-job-categories",
-    //           parentId: "apps",
+    //           link: "/stocks-job-categories",
+    //           parentId: "stocks",
     //         },
     //       ],
     //     },
     //     {
     //       id: "apikey",
     //       label: "API Key",
-    //       link: "/apps-api-key",
-    //       parentId: "apps",
+    //       link: "/stocks-api-key",
+    //       parentId: "stocks",
     //     },
     //   ],
     // },

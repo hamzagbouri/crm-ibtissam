@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
+import Cookies from 'js-cookie';
+import axiosWithToken from '../../pages/ApiCalls/axiosWithToken';
+
 
 //import images
-import avatar1 from "../../assets/images/users/avatar-1.jpg";
+import avatar1 from "../../assets/images/users/avatarr.png";
 import { createSelector } from 'reselect';
 
 const ProfileDropdown = () => {
@@ -18,13 +21,20 @@ const ProfileDropdown = () => {
     const [userName, setUserName] = useState("Admin");
 
     useEffect(() => {
-        if (sessionStorage.getItem("authUser")) {
-            const obj = JSON.parse(sessionStorage.getItem("authUser"));
-            setUserName(process.env.REACT_APP_DEFAULTAUTH === "fake" ? obj.username === undefined ? user.first_name ? user.first_name : obj.data.first_name : "Admin" || "Admin" :
-                process.env.REACT_APP_DEFAULTAUTH === "firebase" ? obj.email && obj.email : "Admin"
-            );
+        const accessToken = Cookies.get('accessToken');
+
+        if (accessToken) {
+            // Set the Authorization header
+            axiosWithToken.get('/user')
+            .then(response => {
+                const user = response.data;
+                setUserName(user.name || 'Admin');
+            })
+            .catch(error => {
+                console.error("Error fetching user data:", error);
+            });
         }
-    }, [userName, user]);
+    }, []);
 
     //Dropdown Toggle
     const [isProfileDropdown, setIsProfileDropdown] = useState(false);
@@ -48,16 +58,16 @@ const ProfileDropdown = () => {
                     <h6 className="dropdown-header">Welcome {userName}!</h6>
                     <DropdownItem href= "/profile"><i className="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i>
                         <span className="align-middle">Profile</span></DropdownItem>
-                    <DropdownItem href= "/apps-chat"><i
+                    {/* <DropdownItem href= "/apps-chat"><i
                         className="mdi mdi-message-text-outline text-muted fs-16 align-middle me-1"></i> <span
                             className="align-middle">Messages</span></DropdownItem>
                     <DropdownItem href= "#"><i
                         className="mdi mdi-calendar-check-outline text-muted fs-16 align-middle me-1"></i> <span
-                            className="align-middle">Taskboard</span></DropdownItem>
+                            className="align-middle">Taskboard</span></DropdownItem> */}
                     <DropdownItem href= "/pages-faqs"><i
                         className="mdi mdi-lifebuoy text-muted fs-16 align-middle me-1"></i> <span
                             className="align-middle">Help</span></DropdownItem>
-                    <div className="dropdown-divider"></div>
+                    {/* <div className="dropdown-divider"></div>
                     <DropdownItem href= "/pages-profile"><i
                         className="mdi mdi-wallet text-muted fs-16 align-middle me-1"></i> <span
                             className="align-middle">Balance : <b>$5971.67</b></span></DropdownItem>
@@ -66,10 +76,10 @@ const ProfileDropdown = () => {
                             className="mdi mdi-cog-outline text-muted fs-16 align-middle me-1"></i> <span
                                 className="align-middle">Settings</span></DropdownItem>
                     <DropdownItem href= "/auth-lockscreen-basic"><i
-                        className="mdi mdi-lock text-muted fs-16 align-middle me-1"></i> <span className="align-middle">Lock screen</span></DropdownItem>
+                        className="mdi mdi-lock text-muted fs-16 align-middle me-1"></i> <span className="align-middle">Lock screen</span></DropdownItem>*/}
                     <DropdownItem href= "/logout"><i
                         className="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span
-                            className="align-middle" data-key="t-logout">Logout</span></DropdownItem>
+                            className="align-middle" data-key="t-logout">Logout</span></DropdownItem> 
                 </DropdownMenu>
             </Dropdown>
         </React.Fragment>

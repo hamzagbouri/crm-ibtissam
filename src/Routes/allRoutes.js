@@ -247,20 +247,26 @@ import UiLink from "../pages/BaseUi/UiLinks/UiLinks";
 
 // Base
 import Collaborators from "../pages/Base/Collaborators.js";
-import Leads from "../pages/Base/Leads.js";
+import Clients from "../pages/Base/CLients.js";
 import Help from "../pages/Base/Help.js";
 import Reports from "../pages/Base/Reports.js";
 import Assitant from "../pages/Base/Assitant.js";
+import MatierePremieres from "../pages/Base/MatierePremiere.js";
+import ProduitFini from "../pages/Base/ProduitFini.js"
+import Commandes from "../pages/Base/Commandee.js";
+import MouvementStocks from "../pages/Base/MouvementStock.js";
 
 const authProtectedRoutes = [
 
   // Base
   { path: "/dashboard-analytics", component: <DashboardAnalytics /> },
   { path: "/collaborators", component: <Collaborators /> },
-  { path: "/assistant", component: <Assitant /> },
-  { path: "/leads", component: <Leads /> },
-  { path: "/reports", component: <Reports /> },
-  { path: "/help", component: <Help /> },
+  { path: "/commande", component: <Commandes /> },
+  { path: "/clients", component: <Clients /> },
+  { path: "/produit", component: <ProduitFini /> },
+  { path: "/matiere-premiere", component: <MatierePremieres /> },
+  { path: "/mouvement", component: <MouvementStocks /> },
+
 
 
 ////////////////////////////////////////////////////////////////
