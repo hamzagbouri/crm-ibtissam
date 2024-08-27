@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-    baseURL: 'http://localhost:8000/api',
+    baseURL: 'http://storemanagement-hce0c0cqddagapcw.eastus-01.azurewebsites.net/api',
     headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
