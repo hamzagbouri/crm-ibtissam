@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-    baseURL: 'http://backend-ibtissam.infinityfreeapp.com/api',
+    baseURL: 'http://localhost:8000/api',
     headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
