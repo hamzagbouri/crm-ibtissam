@@ -2,7 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 const axiosWithToken = axios.create({
-    baseURL: 'http://storemanagement-hce0c0cqddagapcw.eastus-01.azurewebsites.net/api/',
+    baseURL: 'https://store-management-backend-ckhzcpd6cyczfped.eastus-01.azurewebsites.net/api/',
     headers: {
         'Content-Type': 'application/json',
     },
