@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/crm-ibtissam/static/css/main.0ffcf73f.css",
-    "main.js": "/crm-ibtissam/static/js/main.ba737b7a.js",
+    "main.js": "/crm-ibtissam/static/js/main.f4e33f26.js",
     "static/js/685.f2d554a1.chunk.js": "/crm-ibtissam/static/js/685.f2d554a1.chunk.js",
     "static/media/remixicon.svg?t=1690730386070": "/crm-ibtissam/static/media/remixicon.50bf1949f666e36cab12.svg",
     "static/media/img-5.gif": "/crm-ibtissam/static/media/img-5.bfb4402d4c7cd4dff7fa.gif",
@@ -855,6 +855,6 @@
   },
   "entrypoints": [
     "static/css/main.0ffcf73f.css",
-    "static/js/main.ba737b7a.js"
+    "static/js/main.f4e33f26.js"
   ]
 }
